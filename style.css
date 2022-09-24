@@ -1,0 +1,168 @@
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+ body{
+background: rgb(218, 224, 230);
+min-height: 100vh;
+}
+header{
+    position: fixed;
+    width: 100%;
+    padding: 0px 0;
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#logo{
+    width:200px;
+    padding: 2px;
+    margin: 0;
+    max-height: 56px;   
+
+}
+#searchInput{
+   height: 40px;
+   width: 600px;
+   border: none;
+   background: transparent;
+   outline: none;
+   padding: 0 5px;
+   
+}
+
+i{
+    color: rgba(0, 0, 0, 0.555);
+    padding: 2px 5px;
+}
+#search,#search1{
+    background-color:rgb(221, 229, 237,.5) ;
+    border-radius: 20px;
+    display: flex;
+    padding:0 10px ;
+    justify-content: center;
+    align-items: center;
+margin-left: 50px;
+
+}
+#search1{
+    margin-bottom: 100px;
+}
+button{
+    padding: 8px 20px;
+    color: #ab0808;
+    border-radius: 10px;
+  transition: .4s;
+  background-color: transparent;
+  border: 3px solid  #7f0000 ;
+  cursor: pointer;
+}
+button:hover{
+    color: white;
+    border: 3px solid  #7f0000 ;
+    background-color: #7f0000;
+    box-shadow: 1px 5px 8px -5px #7f0000;
+}
+#btn2{
+    color: white;
+    border: 3px solid  #7f0000 ;
+    background-color: #7f0000;
+    margin-left:10px ;
+
+}
+#btn2:hover{
+    padding: 8px 20px;
+    color: #ab0808;
+    border-radius: 10%;
+    transition: .4s;
+    background-color: transparent;
+    border: 3px solid  #7f0000 ;
+}
+.btns{
+    margin-right: 1%;
+    display: flex;
+    
+}
+section{
+    display: flex;
+    align-items: center;
+     flex-direction:column; 
+}
+#post{
+    display: table;
+    padding: 5px;
+    border-radius: 10px;
+    width: 40%;
+    height: 400px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+
+}
+img {
+    display: table-cell;
+}
+#profile,#commentImg{
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 100px;
+    max-height: 100px;
+    padding: 10px;
+}
+#commentImg{
+    width: 80px;
+}
+h2{
+  background: -webkit-linear-gradient(rgb(218, 3, 3), rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#Right{
+    display: flex;
+    flex-direction: row;
+}
+#dot{
+    align-self: flex-start;
+    text-align: center;
+    border: none;
+    padding: 10px;
+    padding-top: 0;
+    font-weight: 1000;
+    font-size: 20px;  
+}
+h3{
+    padding: 0 5px;
+}
+#imgPOSt{
+    max-height: 400px;
+    max-width: inherit;
+    display: block;
+    margin:0 auto;
+}
+#ReactsCounter,#Reacts{
+display: flex;
+justify-content: space-between;
+padding: 5px 10px ;
+}
+#Reacts button{
+border: none;
+font-size: larger;
+}
+#Reacts{
+    border-top: solid 1px #7f0000;
+    border-bottom: solid 1px #7f0000;
+}
+#comment{
+    display: flex;
+    border-bottom: solid .5px #53535379;
+}
+#comment h2{
+    margin: 0;
+}

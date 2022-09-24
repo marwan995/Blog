@@ -1,0 +1,136 @@
+<!DOCTYPE html> 
+ <html lang="en">
+<head>
+<meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="style.css">
+ <link rel="icon" type="image/x-icon" href="icon.png">
+ <link rel="stylesheet" href="style2.css">
+<title>FairyTail </title>
+</head>
+<body>
+  <header> 
+    <img src="logo.png" id="logo" alt="">
+<form action="/signin/search " method="post" id="search">
+  <button type="submit" style=" all: initial;"><div class="w3-xlarge"><i class="fa fa-search"></i></div></button>
+      <input type="text" name="q" id="searchInput" placeholder="Search...">
+</form>
+<div class="btns">
+    <h2><%= loggedUser.username %></h2>
+ <img src="<%= loggedUser.img %> " alt=""  >
+</div>
+</header>
+<div id="search1"></div>
+
+<section>
+  <div id="CreatPost">
+  <h2 id="title">Creat a new post</h2>
+  <form method="POST" action="/Signin/new" > 
+    <textarea name="Description" id="postdes" cols="25" rows="8" placeholder=" Description ..."></textarea>
+    <div class="bot">
+  <input type="file" id="inputPostimg" name="img" accept="image/*" class="postimg">
+  <button type="submit" style="margin: 5px; margin-left: 43%;" id="Submitpost">Submit</button>
+</div>
+  </form>
+      
+  </div>
+</section>
+<section>
+<% posts.forEach(post => { %>
+<div id="<%= post._id %>" class="post">
+  <div id="head">
+    
+  <button id="dot" class="options" >...</button>
+  <div class="DropDown">
+    <form method="POST" action=" /signin/<%= post._id %>?_method=DELETE"style=<%= loggedUser.username==post.username?" ":"display:none ;" %>> <button type="submit" class="Deletebtn">Delete</button></form> 
+    <form method="POST" action="/signin/<%= post._id %>?_method=PATCH" id="editform"  style=<%= loggedUser.username==post.username?" ":"display:none ;" %>   > 
+      <input type="file" id="img" name="img" accept="image/*" class="custom-file-input " >
+      <button type="submit" style="margin: 5px;" id="EditPost">Edit</button>
+      <textarea name="DescriptionEdit" id="editpost" cols="25" rows="8" placeholder="Type your new Description" ><%= post.description!=''?post.description:'\b\b'%></textarea>
+      </form>
+  </div>
+  <div id="Right">
+    <div class="usernameDate">
+      
+  <h2><%= post.username%></h2>
+  <%
+  const date=(D)=>{
+    const [year, month, day] = D.split('-');
+    const result = [padTo2Digits( day),padTo2Digits(month),padTo2Digits( year)].join('/');
+    return result;
+  }
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  } %> 
+  <h5><%=date(post.date.toISOString().split('T')[0]) %> </h5>
+  <h6><%= post.date. toLocaleString('en-US', { hour: 'numeric', hour12: true }) %> </h6>
+  
+</div>
+  <img src="<%= post.userImg%>" id="profile" alt="">
+</div>
+</div>
+<h3 ><%= post.description %> </h3>
+<div id="backGroundColor">
+<img src="<%= post.img %> "  class="imgPOSt" alt="">
+</div>
+<div id="ReactsCounter">
+<h4> <%= post.Reacts %>  React</h4>
+<h4> <%= post.commentsCounter %> Comments</h4>
+</div>
+<div id="Reacts">
+ <form  action="http://localhost:8080/signin/<%= post._id %>/<%= post.Reacts %>" method="get" > <button class="reactComment" >React</button></form>
+  <button class="Commentbtn">Comment</button>
+</div>
+<div id="Comments">
+<% post.comments.forEach(comment => { %>
+ 
+    <div id="comment">
+      <div id="left">
+        <img src="<%= comment.img %> " id="commentImg" alt="">    
+        <div id="commentContent">
+            <h2><%= comment.username %> </h2>
+            <h4><%= comment.Comment %> </h4>
+        </div>
+      </div>
+        <div class="dropdown">
+          <button id="dot" class="dot">...</button>
+          <div class="dropdown-content">
+            <button id="hide">Hide</button>
+        <form method="POST" action="signin/<%= post._id %>/<%=comment._id%>?_method=DELETE"style=<%=( loggedUser.username==post.username)||( loggedUser.username==comment.username)?" ":"display:none ;" %>> <button type="submit">Delete</button></form>
+        <form method="POST" action="signin/<%= post._id %>/<%=comment._id%>?_method=PATCH" id="editform"style=<%= ( loggedUser.username==post.username)||( loggedUser.username==comment.username)?" ":"display:none ;" %>> 
+        <input type="text" name="UpdatedComment" id="editText" placeholder="Edit Comment" style="margin: 5px;" value="<%= comment.Comment %> ">
+        <button type="submit" style="margin: 5px;" id="Edit">Edit</button>
+        </form>
+        
+          </div>
+        </div>
+
+    </div>
+    <% }) %>
+
+</div>
+<form action="http://localhost:8080/signin/comment/<%= post._id %> " method="post" id="creatCommentForm">
+    <input type="text" name="Comment" id="creatcomment" placeholder="Enter a new Comment">
+
+    <button style="z-index: 0;" > post</button>
+</form>
+</div>
+<% }) %>
+</section>
+
+<%-include ('partials/footer') %> 
+<script>
+let hide=Array.from(document.querySelectorAll('#hide'));
+  hide.forEach(e=>{
+      console.log(hide);
+      e.addEventListener('click',()=>{
+        e.parentElement.parentElement.parentElement.style.display="none"
+      })
+  })</script>
+<script  src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+</html>  
